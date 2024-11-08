@@ -1,18 +1,15 @@
 import asyncio
 import logging
-import sys
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.filters import CommandStart
 from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.types import Message
-from aiogram_dialog import DialogManager, StartMode, setup_dialogs
+from aiogram_dialog import setup_dialogs
 
 from core.config_data.config import load_config
 from core.dialogs.start_dialog import start_dialog
-from core.states import StartSG
+from core.handlers.start import start_router
 
 # Настраиваем базовую конфигурацию логирования
 logging.basicConfig(
@@ -36,7 +33,7 @@ async def main() -> None:
     )
     dp = Dispatcher(storage = storage)
 
-    # Настройка диалогов
+    dp.include_routers(start_router)
     setup_dialogs(dp)
     dp.include_router(start_dialog)
 
