@@ -1,9 +1,9 @@
-from aiogram_dialog import Dialog, Window, DialogManager, ChatEvent
+from aiogram_dialog import Dialog, Window, DialogManager
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const, Format
 from aiogram.types import Message
 
-from core.handlers import handle_registration, handle_services, handle_profile, handle_contact
+from core.handlers import handle_profile, handle_registration, handle_services, handle_contact
 from core.states.StartSG import StartSG
 
 

@@ -10,10 +10,12 @@ from aiogram_dialog import setup_dialogs
 from core.config_data.config import load_config
 from core.dialogs.start_dialog import start_dialog
 from core.handlers.start import start_router
+from core.dialogs.contact_dialog import contact_dialog
+
 
 # Настраиваем базовую конфигурацию логирования
 logging.basicConfig(
-    level = logging.DEBUG,
+    level = logging.ERROR,
     format = '[%(asctime)s] #%(levelname)-8s %(filename)s:'
              '%(lineno)d - %(name)s - %(message)s'
 )
@@ -35,7 +37,9 @@ async def main() -> None:
 
     dp.include_routers(start_router)
     setup_dialogs(dp)
+    dp.include_router(contact_dialog)
     dp.include_router(start_dialog)
+     
 
     try:
         logger.info("Запуск бота...")
