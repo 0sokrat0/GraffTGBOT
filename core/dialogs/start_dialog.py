@@ -1,9 +1,9 @@
 from aiogram_dialog import Dialog, Window, DialogManager
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const, Format
-from aiogram.types import Message
 
-from core.handlers import handle_profile, handle_registration, handle_services, handle_contact
+
+from core.handlers.handle_services import handle_registration
 from core.states.StartSG import StartSG
 
 
@@ -30,18 +30,18 @@ start_dialog = Dialog(
             text=Const('📅 Запись'),
             id='register_button',
             on_click=handle_registration),
-        Button(
-            text=Const('💈 Услуги'),
-            id='services_button',
-            on_click=handle_services),
-        Button(
-            text=Const('👤 Профиль'),
-            id='profile_button',
-            on_click=handle_profile),
-        Button(
-            text=Const('☎️ Звонок'),
-            id='contact_button',
-            on_click=handle_contact),
+        # Button(
+        #     text=Const('💈 Услуги'),
+        #     id='services_button',
+        #     on_click=handle_services),
+        # Button(
+        #     text=Const('👤 Профиль'),
+        #     id='profile_button',
+        #     on_click=handle_profile),
+        # Button(
+        #     text=Const('☎️ Звонок'),
+        #     id='contact_button',
+        #     on_click=handle_contact),
         getter=get_username_data,  # Привязка функции для передачи данных о пользователе
         state=StartSG.start,
     ),

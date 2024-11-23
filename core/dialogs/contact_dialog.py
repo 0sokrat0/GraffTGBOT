@@ -11,12 +11,12 @@ from aiogram.enums import ContentType
 
 contact_dialog = Dialog(
         Window(
-        Const("Привет!"),
-        Next(Const("Дальше"), on_click=send_contact),
+        Const("Нажмите на кнопку ниже,чтобы продолжить 👇"),
+        Next(Const("✔️"), on_click=send_contact),
         state=ContactSG.start
     ),
     Window(
-        Const("Чтобы продолжить пользоваться ботом, вам нужно подтвердить свой номер."),
+        Const("Чтобы  пользоваться ботом, вам нужно предоставить свой контакт."),
         MessageInput(get_contact, ContentType.CONTACT),
         state=ContactSG.contact
     )

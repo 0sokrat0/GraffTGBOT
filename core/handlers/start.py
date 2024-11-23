@@ -1,25 +1,14 @@
 import logging
 
+import aiohttp
 from aiogram import Router
 from aiogram.filters import CommandStart
-from aiogram_dialog import StartMode, DialogManager
-from aiogram.types import Message
-import aiohttp
-from core.states.StartSG import StartSG
-from core.config_data.config import Config, Server
+from aiogram.types import CallbackQuery, KeyboardButton, ReplyKeyboardMarkup, Message
+from aiogram_dialog import DialogManager, StartMode
+
 from core.config_data.config import load_config
 from core.states.ContactSG import ContactSG
-
-from aiogram import Bot, Dispatcher
-from aiogram.enums import ContentType
-from aiogram.filters import CommandStart
-from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import CallbackQuery, KeyboardButton, ReplyKeyboardMarkup, Message
-from aiogram_dialog import Dialog, DialogManager, setup_dialogs, StartMode, Window
-from aiogram_dialog.widgets.input import MessageInput
-from aiogram_dialog.widgets.kbd import Next
-from aiogram_dialog.widgets.text import Const
-
+from core.states.StartSG import StartSG
 
 start_router = Router()
 logger = logging.getLogger(__name__)
