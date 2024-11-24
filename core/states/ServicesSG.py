@@ -5,4 +5,3 @@ class ServicesSG(StatesGroup):
     set_services = State()
     set_date = State()
     set_time = State()
-
