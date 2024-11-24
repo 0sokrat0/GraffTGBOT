@@ -2,8 +2,7 @@ from aiogram_dialog import Dialog, Window, DialogManager
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const, Format
 
-
-from core.handlers.handle_services import handle_registration
+from core.handlers.services_handlers.calendar import handle_registration
 from core.states.StartSG import StartSG
 
 

@@ -1,15 +1,14 @@
-import logging
 import json
+import logging
 from typing import Optional, List, Dict, Any
+
 import aiohttp
-from datetime import datetime
-from aiogram.types import CallbackQuery
-from aiogram_dialog import DialogManager, StartMode
-from aiogram_dialog.widgets.kbd import Select
 from aiogram.fsm.context import FSMContext
+from aiogram.types import CallbackQuery
+from aiogram_dialog import DialogManager
+from aiogram_dialog.widgets.kbd import Select
 
 from core.config_data.config import load_config
-from core.states.ServicesSG import ServicesSG
 
 config = load_config()
 logger = logging.getLogger(__name__)
@@ -67,12 +66,7 @@ async def get_specialists_data(dialog_manager: DialogManager, state: FSMContext,
     return {'specialists': specialists_list}
 
 
-async def handle_specialist_selected(
-    event: CallbackQuery,
-    widget: Select,
-    manager: DialogManager,
-    item_id: Any
-):
+async def handle_specialist_selected(event: CallbackQuery,widget: Select,manager: DialogManager,item_id: Any):
     """
     Обработчик выбора специалиста.
     """
@@ -105,42 +99,12 @@ async def handle_specialist_selected(
     # Сохранение выбранного специалиста в FSM
     await manager.middleware_data["state"].update_data(selected_specialist_id=item_id)
 
-    # Обновляем сообщение
-    await event.message.edit_text(
-        f"Вы выбрали специалиста: <b>{name}</b> с ID: <code>{item_id}</code>",
-        parse_mode='HTML'
-    )
+    # # Обновляем сообщение
+    # await event.message.edit_text(
+    #     f"Вы выбрали специалиста: <b>{name}</b> с ID: <code>{item_id}</code>",
+    #     parse_mode='HTML'
+    # )
 
     # Переход к следующему состоянию
     await manager.next()
     await event.answer()
-
-
-async def on_date_selected(event, widget, manager: DialogManager, selected_date: datetime.date):
-    """
-    Обработчик выбора даты.
-    """
-    logger.info(f"Дата выбрана: {selected_date}")
-
-    # Сохранение выбранной даты в FSM
-    await manager.middleware_data["state"].update_data(selected_date=selected_date)
-
-    # Завершение диалога и передача результата
-    await manager.done(result={"date": selected_date})
-
-    # Отправка сообщения пользователю
-    await event.message.answer(f"Вы выбрали дату: {selected_date.strftime('%d.%m.%Y')}")
-
-
-async def handle_registration(callback: CallbackQuery, button, dialog_manager: DialogManager):
-    """
-    Обработчик начала диалога с выбором специалиста.
-    """
-    await dialog_manager.start(ServicesSG.set_specialist, mode=StartMode.NORMAL)
-
-
-async def base_data_getter(dialog_manager: DialogManager, **kwargs):
-    """
-    Пустой геттер данных.
-    """
-    return {}
