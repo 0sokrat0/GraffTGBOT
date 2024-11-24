@@ -9,7 +9,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram_dialog import setup_dialogs
 
 from core.config_data.config import load_config
-from core.dialogs.servises_dialog import servise_dialog
+from core.dialogs.servises_dialog import service_dialog
 
 from core.dialogs.start_dialog import start_dialog
 from core.handlers.start import start_router
@@ -42,7 +42,7 @@ async def main() -> None:
     setup_dialogs(dp)
     dp.include_router(contact_dialog)
     dp.include_router(start_dialog)
-    dp.include_router(servise_dialog)
+    dp.include_router(service_dialog)
      
 
     try:
